@@ -30,5 +30,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "classnames": "^2.2.6",
+    "node-sass": "^4.13.1",
+    "prop-types": "^15.7.2"
   }
 }

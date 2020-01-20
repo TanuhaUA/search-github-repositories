@@ -1,0 +1,53 @@
+$fontColor: #25272c;
+
+.search-page {
+  color: $fontColor;
+
+  &__header {
+    margin: 10px 0 30px;
+    padding: 0 10px;
+    text-align: center;
+    font-weight: normal;
+    font-size: 26px;
+
+    &_sub {
+      margin: 10px 0 20px;
+      font-size: 20px;
+    }
+  }
+  &__results {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 0 10px;
+  }
+  &__result {
+    display: flex;
+    justify-content: space-around;
+    margin: 0 0 7px;
+
+    &_header {
+      padding: 10px 0;
+      font-weight: bold;
+
+      .search-page__name {
+        &:hover {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+  &__name {
+    flex-grow: 1;
+    color: $fontColor;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  &__stars {
+    flex-basis: 50px;
+  }
+}

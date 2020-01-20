@@ -1,0 +1,75 @@
+$buttonColor: #01a1ff;
+$buttonCancelColor: #969696;
+$inputColor: $buttonColor;
+$inputHeight: 30px;
+$inputBorderRadius: 6px;
+
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 10px;
+  text-align: center;
+
+  &__input {
+    flex-basis: 300px;
+    max-width: 100%;
+    height: $inputHeight;
+    margin: 0 10px 10px;
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: $inputBorderRadius;
+    border: 1px solid $inputColor;
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 5px 0 $inputColor;
+    }
+  }
+  &__buttons {
+    display: flex;
+    flex-grow: 1;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  &__btn {
+    flex-basis: 100px;
+    flex-grow: 1;
+    max-width: 200px;
+    height: $inputHeight;
+    margin: 0 10px 0;
+    padding: 0 15px;
+    font-size: 14px;
+    line-height: 1;
+    color: #ffffff;
+    border-radius: $inputBorderRadius;
+    background-color: $buttonColor;
+    border: 0;
+    outline: none;
+    cursor: pointer;
+    transition: 200ms;
+
+    &:hover {
+      box-shadow: 0 0 0 1px $buttonColor;
+    }
+    &:active {
+      box-shadow: none;
+    }
+    &_submit {
+
+    }
+    &_cancel {
+      background-color: $buttonCancelColor;
+
+      &:hover {
+        box-shadow: 0 0 0 1px $buttonCancelColor;
+      }
+      &:active {
+        box-shadow: none;
+      }
+    }
+  }
+}

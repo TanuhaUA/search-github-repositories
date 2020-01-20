@@ -1,11 +1,12 @@
 import React from 'react';
+import SearchPage from './components/SearchPage/';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      Search
+    <div>
+      <SearchPage />
     </div>
   );
-}
+};
 
 export default App;
