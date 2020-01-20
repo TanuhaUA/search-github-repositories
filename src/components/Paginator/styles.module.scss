@@ -1,0 +1,43 @@
+$buttonColor: #01a1ff;
+$buttonHeight: 25px;
+
+.paginator {
+  text-align: center;
+
+  &__btn {
+    flex-basis: 100px;
+    flex-grow: 1;
+    max-width: 200px;
+    height: $buttonHeight;
+    margin: 0 10px 0;
+    padding: 0 15px;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1;
+    color: $buttonColor;
+    border: 1px solid $buttonColor;
+    border-radius: 6px;
+    outline: none;
+    cursor: pointer;
+    transition: 200ms;
+
+    &:hover {
+      box-shadow: 0 0 0 1px $buttonColor;
+    }
+    &:active {
+      box-shadow: none;
+    }
+    &:disabled {
+      color: lightgray;
+      border-color: lightgray;
+
+      &:hover {
+        box-shadow: none;
+      }
+    }
+  }
+  &__highlight {
+    color: $buttonColor;
+    font-weight: 600;
+  }
+}

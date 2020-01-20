@@ -22,6 +22,9 @@ $fontColor: #25272c;
     margin: 20px auto;
     padding: 0 10px;
   }
+  &__no-result {
+    text-align: center;
+  }
   &__result {
     display: flex;
     justify-content: space-around;
@@ -49,5 +52,6 @@ $fontColor: #25272c;
   }
   &__stars {
     flex-basis: 50px;
+    flex-shrink: 0;
   }
 }

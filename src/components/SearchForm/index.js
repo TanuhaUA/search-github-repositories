@@ -6,31 +6,25 @@ import styles from "./style.module.scss";
 class SearchForm extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			searchQuery: '',
-		};
-		this.changeSearchQuery = this.changeSearchQuery.bind(this);
+		this.changeInputValue = this.changeInputValue.bind(this);
 		this.submitSearchHandler = this.submitSearchHandler.bind(this);
 	}
 
-	changeSearchQuery(ev) {
+	changeInputValue(ev) {
 		ev.preventDefault();
-		this.setState({
-			searchQuery: ev.target.value,
-		});
+		const {changeSearchQuery} = this.props;
+		changeSearchQuery(ev.target.value);
 	}
 
 	submitSearchHandler(ev) {
 		ev.preventDefault();
-		const {searchQuery} = this.state;
 		const {searchRepos} = this.props;
 
-		searchRepos(searchQuery);
+		searchRepos();
 	}
 
 	render() {
-		const {searchQuery} = this.state;
-		const {cancelSearching} = this.props;
+		const {cancelSearching, searchQuery} = this.props;
 
 		return (
 			<form
@@ -43,7 +37,7 @@ class SearchForm extends React.Component {
 					className={styles.form__input}
 					placeholder="Enter a repository name"
 					value={searchQuery}
-					onChange={this.changeSearchQuery}
+					onChange={this.changeInputValue}
 				/>
 				<div className={styles.form__buttons}>
 					<button
@@ -63,7 +57,9 @@ class SearchForm extends React.Component {
 
 SearchForm.propTypes = {
 	cancelSearching: PropTypes.func.isRequired,
-	searchRepos: PropTypes.func.isRequired,
+	changeSearchQuery: PropTypes.func.isRequired,
+	searchQuery: PropTypes.string.isRequired,
+	searchRepos: PropTypes.func.isRequired
 };
 
 export default SearchForm;
