@@ -1,4 +1,4 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+#[Click link to see working app](https://tanuhaua.github.io/search-github-repositories/build/index.html)
 
 ## Available Scripts
 
