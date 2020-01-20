@@ -9,22 +9,29 @@ class SearchPage extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			searchQuery: 'asd',
+			searchQuery: '',
 			errorMessage: '',
 			isRequestProcessed: false,
 			currentPage: 1,
 			pagesNumber: 1,
-			resultsPerPage: 10,
+			resultsPerPage: 30,
 			cache: {},
 			repos: [],
 		};
 
 		this.changeSearchQuery = this.changeSearchQuery.bind(this);
+		this.cancelSearching = this.cancelSearching.bind(this);
 		this.searchRepos = this.searchRepos.bind(this);
 	}
 
 	componentDidMount() {
 		this.searchRepos();
+	}
+
+	componentWillUnmount() {
+		if (this.fetchController) {
+			this.fetchController.abort();
+		}
 	}
 
 	changeSearchQuery(newQuery) {
@@ -53,6 +60,15 @@ class SearchPage extends React.Component {
 			searchQuery,
 		} = this.state;
 
+		if (searchQuery === '') {
+			this.setState({
+				repos: [],
+				pagesNumber: 1,
+				errorMessage: '',
+			});
+			return;
+		}
+
 		if (
 			cache[searchQuery]
 			&& cache[searchQuery][currentPage]
@@ -67,7 +83,14 @@ class SearchPage extends React.Component {
 			this.setState({
 				isRequestProcessed: true,
 			});
-			fetch(`https://api.github.com/search/repositories?q=${searchQuery}}&sort=stars&order=desc&page=${currentPage}&per_page=${resultsPerPage}`)
+
+			this.fetchController = new AbortController();
+			this.fetchSignal = this.fetchController.signal;
+
+			fetch(
+				`https://api.github.com/search/repositories?q=${searchQuery}}&sort=stars&order=desc&page=${currentPage}&per_page=${resultsPerPage}`,
+				{signal: this.fetchSignal},
+				)
 				.then(response => {
 					if (response.ok) {
 						return response.json()
@@ -104,6 +127,10 @@ class SearchPage extends React.Component {
 				})
 				.catch((err) => {
 					console.log('ERROR', err);
+					this.setState({
+						isRequestProcessed: false,
+						errorMessage: `${err.name === 'AbortError' ? 'Searching was cancelled.' : 'Something went wrong.'}`,
+					});
 				});
 		}
 	}
@@ -122,7 +149,9 @@ class SearchPage extends React.Component {
 	}
 
 	cancelSearching() {
-		console.log('cancelSearching');
+		if (this.fetchController) {
+			this.fetchController.abort();
+		}
 	}
 
 	createReposList() {
