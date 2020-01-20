@@ -1,4 +1,5 @@
-#[Click link to see working app](https://tanuhaua.github.io/search-github-repositories/build/index.html)
+# Working application
+[Click this link to use app](https://tanuhaua.github.io/search-github-repositories/build/index.html)
 
 ## Available Scripts
 
